@@ -1,0 +1,901 @@
+/* ═══════════════════════════════════════════════════════════════
+   CANONICAL HEADER STYLES — VietnamSkilled
+   Loaded by every page alongside /brand/style.css
+═══════════════════════════════════════════════════════════════ */
+
+/* ═══ GLOBAL MOBILE OVERFLOW FIX — áp dụng mọi trang ≤768px ═══ */
+@media(max-width:768px){
+  /* html: hidden — ngăn scrollbar hiện */
+  html{overflow-x:hidden!important;}
+  /* body: clip — ngăn overflow KHÔNG tạo stacking context (an toàn với native select) */
+  body{overflow-x:clip!important;}
+  /* box-sizing toàn cục */
+  *,*::before,*::after{box-sizing:border-box!important;}
+  /* Images không vượt khung */
+  img,video,iframe,embed{max-width:100%!important;height:auto!important;}
+  /* Sections/containers phổ biến không vượt viewport */
+  section,article,main,header,footer,nav,aside,
+  .section,.hero,.vs-hero,.container,.vs-container,
+  .section-inner,.hero-inner,.vs-hero-inner,
+  .cta-section,.b2b-section,.cta-form{
+    max-width:100%!important;
+    overflow-x:hidden!important;
+  }
+  /* Inline padding lớn → override */
+  [style*="padding: 80px 48px"],[style*="padding:80px 48px"],
+  [style*="padding: 68px 48px"],[style*="padding:68px 48px"],
+  [style*="padding: 56px 48px"],[style*="padding:56px 48px"],
+  [style*="padding: 48px 40px"],[style*="padding:48px 40px"]{
+    padding-left:20px!important;
+    padding-right:20px!important;
+  }
+}
+
+/* Font context reset — đảm bảo nav luôn dùng DM Sans 14px
+   bất kể inline CSS của page parent dùng font/size gì */
+.navigation-wrapper,
+.navigation-wrapper input,
+.navigation-wrapper button,
+.navigation-wrapper select,
+.navigation-wrapper textarea {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #333;
+}
+
+/* Custom dropdown for sub-services */
+.custom-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.custom-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  min-width: 280px;
+  box-shadow: 0px 8px 30px rgba(0,0,0,0.08);
+  z-index: 1000;
+  border-radius: 12px;
+  top: 100%;
+  left: 0;
+  padding: 12px 0;
+  border: 1px solid #f0f2f5;
+}
+.custom-dropdown:hover .custom-dropdown-content {
+  display: block;
+  animation: fadeInDrop 0.2s ease-out forwards;
+}
+@keyframes fadeInDrop {
+  from { opacity: 0; transform: translateY(5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.custom-dropdown-content > a {
+  color: #333;
+  padding: 12px 24px;
+  text-decoration: none;
+  display: block;
+  font-size: 0.95em;
+  transition: background 0.2s, color 0.2s;
+  font-weight: 500;
+}
+.custom-dropdown-content > a:hover {
+  background-color: #f8fafb;
+  color: #25A8A4;
+}
+
+/* Premium icon-card style links inside dropdown */
+.dich-vu-grid a {
+  display: block !important;
+  padding: 10px 12px !important;
+  border-radius: 8px !important;
+  text-decoration: none !important;
+  background: transparent !important;
+  border: none !important;
+  transition: background 0.15s !important;
+}
+.dich-vu-grid a:hover {
+  background: #E6F7F7 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+.custom-dropdown-content a:hover {
+  background-color: #fff !important;
+  border-color: #25A8A4 !important;
+  box-shadow: 0 8px 24px rgba(37,168,164,0.1);
+  transform: translateY(-1px);
+}
+
+/* 2-column dropdown variant (for Chương trình) */
+.dropdown-2col { min-width: 230px; }
+.grid-2col {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 6px 8px;
+}
+
+/* CTA button "Tư vấn miễn phí" in nav */
+.nav-cta-btn {
+  background-color: #25A8A4 !important;
+  color: #ffffff !important;
+  border-radius: 24px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-weight: 600 !important;
+  padding: 12px 28px !important;
+  transition: background 0.3s ease !important;
+}
+.nav-cta-btn:hover {
+  background-color: #1B4F9E !important;
+}
+
+/* Lang dropdown hover + open state */
+.lang-dropdown div:hover { background: #f0f0f0; }
+.lang-dropdown.open { display: flex !important; }
+
+/* Placeholder for header — reserve height to avoid layout shift on load */
+#site-header { min-height: 90px; }
+@media (max-width: 768px) { #site-header { min-height: 70px; } }
+
+/* Override webflow's position:fixed → sticky:
+   - Nằm trong flow → không che hero homepage khi vừa load
+   - Dính top khi scroll xuống → luôn nhìn thấy menu trên sub-pages dài */
+.navigation-wrapper {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 100 !important;
+  height: auto !important;  /* Override webflow's `.navigation-wrapper { height: 1px }` */
+  min-height: 0 !important;
+}
+.navigation-wrapper .navigation {
+  position: relative !important;
+  inset: auto !important;
+  display: flex !important;  /* Override webflow's mobile rule that hides desktop nav at <991px */
+  flex-direction: column !important;
+  align-items: stretch !important;
+}
+.navigation-wrapper .navigation-container {
+  display: flex !important;
+  width: 100% !important;
+}
+
+/* ═══ DEFENSIVE OVERRIDES — đảm bảo nav RENDER IDENTICAL trên mọi page ═══ */
+/* Page-level inline CSS (vd `*{margin:0;padding:0;box-sizing:border-box;}` reset)
+   thường gây hỏng nav. Override tất cả ở đây với !important. */
+
+/* Universal reset cho nav children — undo page-level `*{margin:0;padding:0}` reset */
+.navigation-wrapper * {
+  box-sizing: border-box !important;
+}
+/* Background đảm bảo nav không trong suốt khi sticky đè lên content */
+.navigation-wrapper {
+  background: #fff !important;
+}
+
+/* Override webflow's `html, body { display: flex; flex-direction: column }`
+   which makes <section> children shrinkable, breaking dich-vu hero layout.
+   Force all direct body children to KEEP natural height. */
+html, body > * {
+  flex-shrink: 0 !important;
+}
+body > section,
+body > div.section-divider {
+  flex: 0 0 auto !important;
+  height: auto !important;
+}
+
+/* Topbar */
+.navigation-wrapper .topbar {
+  background-color: #f5f5f5 !important;
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+.navigation-wrapper .topbar-link { color: inherit !important; text-decoration: none !important; }
+.navigation-wrapper .copy-small { font-size: 13px !important; color: #555 !important; }
+
+/* Logo */
+.navigation-wrapper .logo {
+  height: 48px !important;
+  width: auto !important;
+  display: block !important;
+}
+
+/* Nav container */
+.navigation-wrapper .navigation-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  padding: 0 16px !important;
+  width: 100% !important;
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+}
+.navigation-wrapper .navi-link-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 2px !important;
+  flex-wrap: nowrap !important;
+}
+/* Hamburger button (.menu-mob) — chỉ hiện khi mobile, ẩn ở desktop */
+.navigation-wrapper .menu-mob,
+.navigation-wrapper .w-nav-button {
+  display: none !important;
+}
+@media (max-width: 991px) {
+  .navigation-wrapper .menu-mob,
+  .navigation-wrapper .w-nav-button {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 44px !important;
+    height: 44px !important;
+    border-radius: 8px !important;
+    background: #f0f7fa !important;
+    cursor: pointer !important;
+    padding: 0 !important;
+  }
+  .navigation-wrapper .menu-mob .w-icon-nav-menu,
+  .navigation-wrapper .w-nav-button .w-icon-nav-menu {
+    color: #286A9A !important;
+    font-size: 22px !important;
+  }
+}
+.navigation-wrapper .navigation-container {
+  max-width: 1320px !important;
+  margin: 0 auto !important;
+  padding: 8px 20px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 12px !important;
+}
+.navigation-wrapper .navigation-logo { flex-shrink: 0 !important; }
+.navigation-wrapper .nav-button-wrap { flex-shrink: 0 !important; margin-left: 0 !important; }
+.navigation-wrapper .navi-link-wrap > a,
+.navigation-wrapper .navi-link-wrap > .custom-dropdown > a {
+  padding: 8px 8px !important;
+  font-size: 13.5px !important;
+  white-space: nowrap !important;
+}
+.navigation-wrapper .nav-cta-btn,
+.navigation-wrapper .primary-button.nav-cta-btn {
+  padding: 9px 18px !important;
+  font-size: 13.5px !important;
+}
+
+/* Nav links */
+.navigation-wrapper .navigation-link,
+.navigation-wrapper .custom-dropdown > .navigation-link {
+  font-family: 'Montserrat', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #1e293b !important;
+  padding: 16px 8px !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+.navigation-wrapper .navigation-link:hover { color: #25A8A4 !important; }
+.navigation-wrapper .navigation-link.w--current { color: #25A8A4 !important; }
+
+/* Lang switcher — ensure chevron visible */
+.navigation-wrapper .custom-lang-select { display: inline-flex !important; align-items: center !important; }
+.navigation-wrapper .custom-lang-select svg { display: inline-block !important; flex-shrink: 0 !important; }
+.navigation-wrapper .lang-selected { display: flex !important; align-items: center !important; gap: 8px !important; }
+
+/* CTA button — ensure visible */
+.navigation-wrapper .nav-button-wrap { display: inline-flex !important; align-items: center !important; flex-shrink: 0 !important; }
+.navigation-wrapper .nav-cta-btn,
+.navigation-wrapper .primary-button.nav-cta-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  background-color: #25A8A4 !important;
+  color: #fff !important;
+  border-radius: 24px !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  padding: 11px 24px !important;
+  text-decoration: none !important;
+  white-space: nowrap !important;
+  border: none !important;
+  cursor: pointer !important;
+}
+.navigation-wrapper .nav-cta-btn:hover,
+.navigation-wrapper .primary-button.nav-cta-btn:hover {
+  background-color: #1B4F9E !important;
+}
+
+/* Topbar items spacing — homepage *{padding:0} would otherwise crush these */
+.navigation-wrapper .topbar-adress-mail-wrap {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+}
+.navigation-wrapper .topbar-link {
+  padding: 4px 0 !important;
+  display: inline-block !important;
+}
+
+/* Nav button wrap container alignment */
+.navigation-wrapper .nav-button-wrap {
+  margin-left: 8px !important;
+}
+
+/* Lang dropdown options */
+.navigation-wrapper .lang-dropdown div {
+  padding: 8px 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+/* Dropdown panels — reinforce padding/border that *{padding:0} would zero out */
+.navigation-wrapper .custom-dropdown-content {
+  padding: 12px 0 !important;
+  position: absolute !important;
+  z-index: 9999 !important;
+  background: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.15) !important;
+  top: 100% !important;
+  left: 0 !important;
+  min-width: 280px !important;
+}
+.navigation-wrapper .custom-dropdown {
+  position: relative !important;
+}
+.navigation-wrapper .custom-dropdown:hover .custom-dropdown-content,
+.navigation-wrapper .custom-dropdown:focus-within .custom-dropdown-content {
+  display: block !important;
+}
+.navigation-wrapper .custom-dropdown-content > a {
+  padding: 12px 24px !important;
+}
+.navigation-wrapper .dich-vu-grid a {
+  padding: 10px 12px !important;
+}
+.navigation-wrapper .grid-2col {
+  padding: 6px 8px !important;
+}
+
+/* Logo container */
+.navigation-wrapper .navigation-logo {
+  flex-shrink: 0 !important;
+  display: flex !important;
+  align-items: center !important;
+}
+.navigation-wrapper .brand {
+  display: flex !important;
+  align-items: center !important;
+  padding: 0 !important;
+}
+
+
+/* ==== NEW LAYOUT FIXES ==== */
+.topbar { display: none !important; }
+
+.navigation-wrapper {
+  border-top: 1px solid #e2e8f0;
+}
+
+.navigation-container {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding: 10px 40px !important;
+  box-sizing: border-box !important;
+}
+
+.navigation-logo {
+  float: none !important;
+  flex-shrink: 0 !important;
+}
+
+.navi-link-wrap {
+  display: flex !important;
+  align-items: center !important;
+  float: none !important;
+  gap: 36px !important;
+  background: transparent !important;
+  position: static !important;
+  flex: 1 !important;
+}
+
+/* Center the menu items by using auto margins on both sides */
+.navi-link-wrap > .navigation-link:first-child {
+  margin-left: auto !important;
+}
+
+.navigation-link, .w-nav-link {
+  padding: 10px 0 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  color: #1e293b !important;
+  text-decoration: none !important;
+  margin: 0 !important;
+}
+
+.navigation-link.w--current { color: #1e293b !important; }
+
+.custom-lang-select {
+  margin-left: auto !important; /* Pushes language switcher and CTA to the right */
+  margin-right: 0 !important;
+}
+
+.nav-button-wrap {
+  margin-left: 10px !important;
+  flex-shrink: 0 !important;
+}
+.nav-cta-btn {
+  background-color: #63a4a0 !important;
+  padding: 12px 24px !important;
+}
+
+/* (Orphan rule `.navi-link-wrap { display: none }` removed — was hiding nav on all screens) */
+
+/* ==== NEW LAYOUT FIXES ==== */
+.topbar { display: none !important; }
+
+.navigation-wrapper {
+  border-top: 1px solid #e2e8f0;
+}
+
+.navigation-container {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding: 10px 40px !important;
+  box-sizing: border-box !important;
+}
+
+.navigation-logo {
+  float: none !important;
+  flex-shrink: 0 !important;
+}
+
+.navi-link-wrap {
+  display: flex !important;
+  align-items: center !important;
+  float: none !important;
+  gap: 24px !important; /* Giảm gap để không bị chật */
+  background: transparent !important;
+  position: static !important;
+  flex: 1 !important;
+}
+
+/* Center the menu items by using auto margins on both sides */
+.navi-link-wrap > .navigation-link:first-child {
+  margin-left: auto !important;
+}
+
+/* KHÔNG cho text xuống dòng */
+.navigation-link, .w-nav-link, .custom-dropdown, .custom-dropdown > .navigation-link {
+  padding: 10px 0 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  color: #1e293b !important;
+  text-decoration: none !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+}
+
+.navigation-link.w--current { color: #1e293b !important; }
+
+.custom-lang-select {
+  margin-left: auto !important; /* Pushes language switcher and CTA to the right */
+  margin-right: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.nav-button-wrap {
+  margin-left: 10px !important;
+  flex-shrink: 0 !important;
+}
+.nav-cta-btn {
+  background-color: #63a4a0 !important;
+  padding: 12px 24px !important;
+  white-space: nowrap !important;
+}
+
+/* (Orphan rule `.navi-link-wrap { display: none }` removed) */
+
+/* ==== NEW LAYOUT FIXES ==== */
+.topbar { display: none !important; }
+
+.navigation-wrapper {
+  border-top: 1px solid #e2e8f0;
+}
+
+.navigation-container {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding: 10px 40px !important;
+  box-sizing: border-box !important;
+  position: relative !important; /* For absolute centering */
+}
+
+.navigation-logo {
+  float: none !important;
+  flex-shrink: 0 !important;
+  z-index: 10;
+}
+
+.navi-link-wrap {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-end !important;
+  float: none !important;
+  background: transparent !important;
+  position: static !important;
+  flex: 1 !important;
+}
+
+/* THE WRAPPER FOR LINKS */
+.menu-links-wrapper {
+  position: absolute !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 28px !important;
+  z-index: 5;
+}
+
+/* KHÔNG cho text xuống dòng */
+.navigation-link, .w-nav-link, .custom-dropdown, .custom-dropdown > .navigation-link {
+  padding: 10px 0 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  color: #1e293b !important;
+  text-decoration: none !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  background: transparent !important;
+}
+
+.navigation-link.w--current { color: #1e293b !important; }
+
+.custom-lang-select {
+  margin-left: 20px !important; 
+  margin-right: 0 !important;
+  flex-shrink: 0 !important;
+  z-index: 10;
+}
+
+.nav-button-wrap {
+  margin-left: 10px !important;
+  flex-shrink: 0 !important;
+  z-index: 10;
+}
+.nav-cta-btn {
+  background-color: #63a4a0 !important;
+  padding: 12px 24px !important;
+  white-space: nowrap !important;
+}
+
+
+}
+
+
+/* ==== NEW LAYOUT FIXES ==== */
+.topbar { display: none !important; }
+
+.navigation-wrapper {
+  border-top: 1px solid #e2e8f0;
+}
+
+.navigation-container {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding: 10px 40px !important;
+  box-sizing: border-box !important;
+}
+
+.navigation-logo {
+  float: none !important;
+  flex-shrink: 0 !important;
+}
+
+.navi-link-wrap {
+  display: flex !important;
+  align-items: center !important;
+  float: none !important;
+  gap: 24px !important; 
+  background: transparent !important;
+  position: static !important;
+  flex: 1 !important;
+}
+
+/* Center the menu items by using auto margins on both sides */
+.navi-link-wrap > .navigation-link:first-child {
+  margin-left: auto !important;
+}
+
+/* KHÔNG cho text xuống dòng */
+.navigation-link, .w-nav-link, .custom-dropdown, .custom-dropdown > .navigation-link {
+  padding: 10px 0 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  color: #1e293b !important;
+  text-decoration: none !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  background: transparent !important;
+}
+
+.navigation-link.w--current { color: #1e293b !important; }
+
+.custom-lang-select {
+  margin-left: auto !important; /* Pushes language switcher and CTA to the right */
+  margin-right: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.nav-button-wrap {
+  margin-left: 10px !important;
+  flex-shrink: 0 !important;
+}
+.nav-cta-btn {
+  background-color: #63a4a0 !important;
+  padding: 12px 24px !important;
+  white-space: nowrap !important;
+}
+
+/* ==== NEW LAYOUT FIXES ==== */
+.topbar { display: none !important; }
+
+.navigation-wrapper {
+  border-top: 1px solid #e2e8f0;
+}
+
+.navigation-container {
+  display: flex !important;
+  align-items: center !important;
+  width: 100% !important;
+  max-width: 1280px !important;
+  margin: 0 auto !important;
+  padding: 10px 40px !important;
+  box-sizing: border-box !important;
+}
+
+.navigation-logo {
+  float: none !important;
+  flex-shrink: 0 !important;
+}
+
+/* KHÔNG cho text xuống dòng */
+.navigation-link, .w-nav-link, .custom-dropdown, .custom-dropdown > .navigation-link {
+  padding: 10px 0 !important;
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  color: #1e293b !important;
+  text-decoration: none !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+  flex-shrink: 0 !important;
+  background: transparent !important;
+}
+
+.navigation-link.w--current { color: #1e293b !important; }
+
+.nav-cta-btn {
+  background-color: #63a4a0 !important;
+  padding: 12px 24px !important;
+  white-space: nowrap !important;
+}
+
+
+
+@media (min-width: 992px) {
+  .navigation-container {
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: space-between !important;
+  }
+  
+  .navigation-logo {
+    flex: 1 1 0% !important; /* Cột bên trái */
+    display: flex !important;
+    justify-content: flex-start !important;
+  }
+  
+  .navigation-container::after {
+    content: "" !important;
+    flex: 1 1 0% !important; /* Cột ảo bên phải để cân bằng hoàn hảo với Logo */
+  }
+  
+  .navi-link-wrap {
+    flex: 0 0 auto !important; /* Cột giữa (chứa các link) sẽ tự động nằm chính giữa màn hình */
+    position: static !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 24px !important; 
+    background: transparent !important;
+  }
+  
+  .navigation-link, .custom-dropdown, .custom-lang-select, .nav-button-wrap {
+    margin-left: 0 !important;
+  }
+  
+  /* Rút Lang và CTA ra khỏi luồng giữa, ghim chặt vào góc phải */
+  .custom-lang-select {
+    position: absolute !important;
+    right: 210px !important; 
+    margin: 0 !important;
+  }
+  .nav-button-wrap {
+    position: absolute !important;
+    right: 40px !important;
+    margin: 0 !important;
+  }
+}
+
+/* ▼ button (inject bởi _header.js): ẩn trên desktop */
+.navigation-wrapper .vs-dd-arrow {
+  display: none;
+  background: none; border: none; cursor: pointer; padding: 0; margin: 0; line-height: 1;
+}
+/* ▼ built-in trong link: ẩn trên mobile (class thêm bởi JS) */
+.navigation-wrapper .vs-link-arrow { transition: none; }
+
+/* ═══ MOBILE NAV (≤991px) — hamburger + dropdown dọc ═══ */
+@media (max-width: 991px) {
+  /* Ẩn ▼ built-in trong link text */
+  .navigation-wrapper .vs-link-arrow { display: none !important; }
+
+  /* Ẩn nav links + lang/CTA, chỉ hiện hamburger */
+  .navigation-wrapper .navi-link-wrap { display: none !important; }
+  .navigation-wrapper .nav-right-group { display: none !important; }
+  .navigation-wrapper .navigation-container { position: relative !important; }
+
+  /* Khi hamburger bật: dropdown dọc toàn chiều ngang */
+  .navigation-wrapper .navi-link-wrap.vs-nav-open {
+    display: flex !important;
+    flex-direction: column !important;
+    position: absolute !important;
+    top: 100% !important;
+    left: 0 !important; right: 0 !important;
+    background: #fff !important;
+    padding: 4px 0 16px !important;
+    box-shadow: 0 8px 32px rgba(0,0,0,.14) !important;
+    z-index: 100001 !important;
+    border-top: 2px solid #47979F !important;
+    gap: 0 !important;
+  }
+
+  /* Tất cả nav links trong mobile menu: trái đều, padding đồng nhất */
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .navigation-link {
+    display: block !important;
+    padding: 14px 20px !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    color: #1e293b !important;
+    text-align: left !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    line-height: 1.4 !important;
+  }
+
+  /* Dropdown item: flex row — link + ▼ cùng hàng, submenu xuống dưới */
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown {
+    width: 100% !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: stretch !important;
+    border-bottom: 1px solid #f1f5f9 !important;
+    position: static !important;
+  }
+  /* Parent link: vừa đủ chữ — ▼ ngồi sát bên phải */
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown > .navigation-link {
+    flex: 0 0 auto !important;
+    width: auto !important;
+    border-bottom: none !important;
+    padding-right: 4px !important;
+  }
+
+  /* ▼ button — flex item cùng hàng với link cha */
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .vs-dd-arrow {
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    flex: 0 0 48px !important;
+    height: auto !important;
+    min-height: 48px !important;
+    color: #47979F !important;
+    font-size: 11px !important;
+    border-left: none !important;
+    padding-left: 2px !important;
+    transition: transform .2s, color .2s !important;
+    position: static !important;
+    cursor: pointer !important;
+  }
+  /* Xoay ▼ khi mở */
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown.vs-sub-open .vs-dd-arrow {
+    transform: rotate(180deg) !important;
+    color: #286A9A !important;
+  }
+  /* Submenu: full-width, xuống dưới hàng link+▼ */
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown > .custom-dropdown-content {
+    flex: 0 0 100% !important;
+  }
+
+  /* Submenu — ẩn mặc định, hiện khi vs-sub-open */
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown-content {
+    display: none !important;
+    position: static !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0 !important;
+    background: #f0f7fa !important;
+    min-width: unset !important;
+  }
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown.vs-sub-open > .custom-dropdown-content {
+    display: block !important;
+  }
+
+  /* Item trong submenu: chỉ hiện tên, ẩn mô tả */
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown-content a,
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown-content .dich-vu-grid a,
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown-content .grid-2col a {
+    display: block !important;
+    padding: 12px 20px 12px 32px !important;
+    border-bottom: 1px solid #e2ecf4 !important;
+    font-size: 14px !important; font-weight: 600 !important;
+    color: #286A9A !important;
+    text-decoration: none !important;
+  }
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown-content a > div:not(:first-child),
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown-content .dich-vu-grid a > div:not(:first-child),
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown-content .grid-2col a > div:not(:first-child) {
+    display: none !important;
+  }
+  .navigation-wrapper .navi-link-wrap.vs-nav-open .custom-dropdown-content a > div:first-child {
+    margin: 0 !important; line-height: 1.4 !important;
+  }
+
+  /* Logo: không bị méo trên mobile */
+  .navigation-wrapper .logo {
+    height: 38px !important;
+    width: auto !important;
+    max-width: none !important;
+    object-fit: contain !important;
+    display: block !important;
+  }
+  .navigation-wrapper .navigation-logo,
+  .navigation-wrapper .brand,
+  .navigation-wrapper .w-nav-brand {
+    width: auto !important;
+    flex-shrink: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+  }
+
+  /* Hamburger active tint */
+  .navigation-wrapper .menu-mob.vs-nav-active { background: rgba(71,151,159,.12) !important; border-radius: 6px !important; }
+}

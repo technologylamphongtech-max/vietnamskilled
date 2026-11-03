@@ -1,0 +1,13 @@
+/config.php
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+*.log
+*.bak
+/cms-data/content.lock
+/cms-data/save-*
+/cms-data/media/
+/vs_backups/

@@ -1,0 +1,124 @@
+<!-- ═══════════════════════════════════════════════════════════════
+  CANONICAL HEADER — VietnamSkilled
+  Source of truth for nav. Update HERE once, all pages auto-sync.
+  Loaded by _header.js into <div id="site-header"></div> placeholder.
+═══════════════════════════════════════════════════════════════ -->
+<style>
+/* Nhóm Lang + CTA ghim góc phải, gap cố định — không vỡ khi dịch (DE/EN dài hơn VN) */
+@media (min-width: 992px) {
+  .navigation-wrapper .nav-right-group {
+    position: absolute !important;
+    right: 40px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+    z-index: 1000 !important;
+    margin: 0 !important;
+  }
+  .navigation-wrapper .nav-right-group .custom-lang-select,
+  .navigation-wrapper .nav-right-group .nav-button-wrap {
+    position: relative !important;
+    right: auto !important;
+    left: auto !important;
+    margin: 0 !important;
+  }
+}
+/* Nút lên-đầu-trang: chuyển sang góc PHẢI, ngay trên cụm liên hệ Zalo/gọi */
+#vs-back-top { left: auto !important; right: 92px !important; bottom: 86px !important; }
+@media (max-width: 480px) { #vs-back-top { left: auto !important; right: 80px !important; bottom: 76px !important; } }
+</style>
+<div class="navigation-wrapper">
+  <div data-collapse="medium" data-animation="default" data-duration="400" data-easing="ease" data-easing2="ease" role="banner" class="navigation w-nav">
+
+    <!-- (Topbar removed per design — chỉ giữ nav chính) -->
+
+    <!-- NAV CONTAINER -->
+    <div class="navigation-container">
+      <div class="navigation-logo">
+        <a href="/" class="brand w-nav-brand"><img alt="VietnamSkilled Logo" src="/logo.png" class="logo"></a>
+      </div>
+
+      <nav role="navigation" class="navi-link-wrap w-nav-menu">
+        <a href="/" class="navigation-link w-nav-link">Trang chủ</a>
+
+        <!-- Dropdown: Dịch vụ -->
+        <div class="custom-dropdown">
+          <a href="/dich-vu/" class="navigation-link w-nav-link">Dịch vụ <span style="font-size: 0.7em; margin-left: 2px;">▼</span></a>
+          <div class="custom-dropdown-content" style="min-width:280px;padding:8px 6px;">
+            <div class="dich-vu-grid">
+              <a href="/dich-vu/du-hoc-nghe" style="display:block;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='#E6F7F7'" onmouseout="this.style.background='transparent'">
+                <div style="font-size:0.88em;font-weight:700;color:#1e293b;margin-bottom:3px;line-height:1.3;">Tư vấn hồ sơ Du học nghề</div>
+                <div style="font-size:0.78em;color:#94a3b8;line-height:1.4;">Chuẩn bị hồ sơ, luyện phỏng vấn, hỗ trợ đến khi cầm visa.</div>
+              </a>
+              <a href="/dich-vu/cong-nhan-bang-cap" style="display:block;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='#E6F7F7'" onmouseout="this.style.background='transparent'">
+                <div style="font-size:0.88em;font-weight:700;color:#1e293b;margin-bottom:3px;line-height:1.3;">Tư vấn công nhận bằng cấp</div>
+                <div style="font-size:0.78em;color:#94a3b8;line-height:1.4;">Thủ tục Berufsanerkennung cho bằng Việt Nam tại Đức.</div>
+              </a>
+              <a href="/dich-vu/tuyen-dung-doi-tac" style="display:block;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='#E6F7F7'" onmouseout="this.style.background='transparent'">
+                <div style="font-size:0.88em;font-weight:700;color:#1e293b;margin-bottom:3px;line-height:1.3;">Tư vấn tuyển dụng đối tác NN</div>
+                <div style="font-size:0.78em;color:#94a3b8;line-height:1.4;">Kết nối doanh nghiệp nước ngoài với nhân tài Việt Nam.</div>
+              </a>
+              <a href="/dich-vu/khoa-luyen-phong-van" style="display:block;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='#E6F7F7'" onmouseout="this.style.background='transparent'">
+                <div style="font-size:0.88em;font-weight:700;color:#1e293b;margin-bottom:3px;line-height:1.3;">Khoá luyện phỏng vấn</div>
+                <div style="font-size:0.78em;color:#94a3b8;line-height:1.4;">Thực hành tình huống thực tế, nâng tỷ lệ đậu phỏng vấn.</div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dropdown: Chương trình -->
+        <div class="custom-dropdown">
+          <a href="/chuong-trinh-va-thi-truong/" class="navigation-link w-nav-link">Chương trình <span style="font-size: 0.7em; margin-left: 2px;">▼</span></a>
+          <div class="custom-dropdown-content dropdown-2col">
+            <div class="grid-2col detail-layout">
+              <a href="/chuong-trinh-va-thi-truong" style="display:block;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='#E6F7F7'" onmouseout="this.style.background='transparent'">
+                <div style="margin-bottom:3px;line-height:1.4;"><span style="font-size:0.88em;font-weight:700;color:#1e293b;">Du học nghề Đức</span><span style="display:inline-block;background:rgba(37,168,164,0.12);color:#25A8A4;padding:1px 7px;border-radius:20px;font-weight:600;font-size:0.65em;white-space:nowrap;vertical-align:middle;margin-left:5px;">Hot</span></div>
+                <div style="font-size:0.78em;color:#94a3b8;line-height:1.4;">Đào tạo kép miễn phí, nhận lương thực hành ngay.</div>
+              </a>
+              <a href="javascript:void(0)" style="display:block;padding:10px 12px;border-radius:8px;text-decoration:none;pointer-events:none;opacity:0.45;">
+                <div style="margin-bottom:3px;line-height:1.4;"><span style="font-size:0.88em;font-weight:700;color:#1e293b;">Công nhận bằng cấp</span><span style="display:inline-block;background:rgba(0,0,0,0.06);color:#64748b;padding:1px 7px;border-radius:20px;font-weight:600;font-size:0.65em;white-space:nowrap;vertical-align:middle;margin-left:5px;">Sắp mở</span></div>
+                <div style="font-size:0.78em;color:#94a3b8;line-height:1.4;">Chuyển đổi bằng cấp Việt Nam để làm việc tại Đức.</div>
+              </a>
+              <a href="/chuong-trinh-va-thi-truong" style="display:block;padding:10px 12px;border-radius:8px;text-decoration:none;transition:background 0.15s;" onmouseover="this.style.background='#E6F7F7'" onmouseout="this.style.background='transparent'">
+                <div style="margin-bottom:3px;line-height:1.4;"><span style="font-size:0.88em;font-weight:700;color:#1e293b;">Du học Châu Âu</span><span style="display:inline-block;background:rgba(37,168,164,0.12);color:#25A8A4;padding:1px 7px;border-radius:20px;font-weight:600;font-size:0.65em;white-space:nowrap;vertical-align:middle;margin-left:5px;">Mới</span></div>
+                <div style="font-size:0.78em;color:#94a3b8;line-height:1.4;">Học tập tại các nền giáo dục đại học vượt trội trong EU.</div>
+              </a>
+              <a href="javascript:void(0)" style="display:block;padding:10px 12px;border-radius:8px;text-decoration:none;pointer-events:none;opacity:0.45;">
+                <div style="margin-bottom:3px;line-height:1.4;"><span style="font-size:0.88em;font-weight:700;color:#1e293b;">Thực tập Đan Mạch</span><span style="display:inline-block;background:rgba(0,0,0,0.06);color:#64748b;padding:1px 7px;border-radius:20px;font-weight:600;font-size:0.65em;white-space:nowrap;vertical-align:middle;margin-left:5px;">Tạm ngưng</span></div>
+                <div style="font-size:0.78em;color:#94a3b8;line-height:1.4;">Kỹ năng chuyên ngành Nông nghiệp chuẩn Đan Mạch.</div>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <a href="/tin-tuc" class="navigation-link w-nav-link">Tin tức &amp; Cập nhật</a>
+        <a href="/ve-chung-toi" class="navigation-link w-nav-link">Về chúng tôi</a>
+
+        <!-- ═ Nhóm Lang + CTA (ghim phải, gap cố định) ═ -->
+        <div class="nav-right-group">
+        <!-- Language Switcher (handled by _header.js) -->
+        <div class="custom-lang-select" translate="no" style="position: relative; display: inline-flex; align-items: center; cursor: pointer; margin-right: 8px; z-index: 1000;" data-lang-toggle>
+          <div class="lang-selected" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; border: 1px solid #ccc; border-radius: 4px; background: #fff; color: #333; font-weight: 500; font-size: 14px;">
+            <img src="https://flagcdn.com/w20/vn.png" data-lang-img style="width: 20px; height: 15px; object-fit: cover;">
+            <span data-lang-txt>VN</span>
+            <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1L5 5L9 1" stroke="#333" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+          </div>
+          <div class="lang-dropdown" style="position: absolute; top: calc(100% + 4px); left: 0; width: 100%; background: #fff; border: 1px solid #ccc; border-radius: 4px; display: none; flex-direction: column; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+            <div data-lang="vi" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 14px; color: #333; cursor:pointer;"><img src="https://flagcdn.com/w20/vn.png" style="width: 20px;"> VN</div>
+            <div data-lang="en" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 14px; color: #333; cursor:pointer;"><img src="https://flagcdn.com/w20/us.png" style="width: 20px;"> EN</div>
+            <div data-lang="de" style="display: flex; align-items: center; gap: 8px; padding: 8px 12px; font-size: 14px; color: #333; cursor:pointer;"><img src="https://flagcdn.com/w20/de.png" style="width: 20px;"> DE</div>
+          </div>
+        </div>
+
+        <div class="nav-button-wrap"><a href="#cta" class="primary-button w-button nav-cta-btn" style="background-color: #25A8A4;" data-header-cta>Tư vấn miễn phí</a></div>
+        </div><!-- /nav-right-group -->
+      </nav>
+
+      <div class="menu-mob w-nav-button"><div class="w-icon-nav-menu"></div></div>
+    </div>
+  </div>
+</div>
+
+

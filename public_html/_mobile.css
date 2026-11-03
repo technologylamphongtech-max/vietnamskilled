@@ -1,0 +1,135 @@
+/* ═══════════════════════════════════════════════════════════
+   _mobile.css — VietnamSkilled
+   Responsive toàn cục: load tự động qua _header.js mọi trang
+   KHÔNG sửa file này trực tiếp — edit rồi deploy
+═══════════════════════════════════════════════════════════ */
+
+/* ── 1. RESET CƠ BẢN ── */
+@media (max-width: 768px) {
+  html { overflow-x: hidden !important; }
+  body { overflow-x: clip !important; }
+  *, *::before, *::after { box-sizing: border-box !important; }
+  img, video, iframe, embed, svg { max-width: 100% !important; height: auto !important; }
+}
+
+/* ── 2. GRID & FLEX: tất cả 2+ cột → 1 cột ── */
+@media (max-width: 768px) {
+  /* Class-based grids */
+  .split, .vs-split,
+  .level-grid, .info-grid, .compare-grid,
+  .b2b-grid, .b2b-stats, .form-row,
+  .tab-content.active,
+  .vs-steps, .vs-cards,
+  .cards, .pkg-grid,
+  .footer-grid, .partner-grid {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* Inline style grids — override bằng selector thuộc tính */
+  [style*="grid-template-columns: 1fr 1fr"],
+  [style*="grid-template-columns:1fr 1fr"],
+  [style*="grid-template-columns: 1fr 1fr 1fr"],
+  [style*="grid-template-columns:1fr 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+}
+
+/* ── 3. PADDING CÁC SECTION LỚN ── */
+@media (max-width: 768px) {
+  .hero, .vs-hero,
+  .section, .vs-section,
+  .cta-section, .vs-cta-section,
+  .b2b-section,
+  #vct .sec, #vct .hero, #vct .commit, #vct .cta {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  /* padding:Xpx 48px dạng inline */
+  [style*="padding: 80px 48px"], [style*="padding:80px 48px"],
+  [style*="padding: 68px 48px"], [style*="padding:68px 48px"],
+  [style*="padding: 64px 48px"], [style*="padding:64px 48px"],
+  [style*="padding: 56px 48px"], [style*="padding:56px 48px"],
+  [style*="padding: 48px 40px"], [style*="padding:48px 40px"],
+  [style*="padding: 32px 48px"], [style*="padding:32px 48px"] {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+
+  nav.topnav   { padding-left: 16px !important; padding-right: 16px !important; }
+  .anchor-inner { padding-left: 12px !important; padding-right: 12px !important; }
+  .stats-inner  {
+    flex-direction: column !important;
+    align-items: center !important;
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    gap: 16px !important;
+  }
+}
+
+/* ── 4. TYPOGRAPHY ── */
+@media (max-width: 768px) {
+  h1 { font-size: clamp(22px, 6vw, 34px) !important; line-height: 1.3 !important; }
+  h2 { font-size: clamp(18px, 5vw, 28px) !important; line-height: 1.35 !important; }
+  h3 { font-size: clamp(16px, 4vw, 22px) !important; }
+}
+
+/* ── 5. FORM ── */
+@media (max-width: 768px) {
+  .form-select option { color: #1e293b !important; background: #fff !important; }
+  .cta-form { padding: 20px !important; }
+  /* Form phone: input + nút xếp dọc thay vì ngang */
+  .form-phone {
+    grid-template-columns: 1fr !important;
+    gap: 10px !important;
+  }
+  .form-phone .btn {
+    width: 100% !important;
+    justify-content: center !important;
+    text-align: center !important;
+    padding: 12px !important;
+  }
+}
+
+/* ── 6. HOMEPAGE TESTIMONIAL — đồng nhất với desktop ── */
+@media (max-width: 768px) {
+  /* 1 cột thay vì 4 cột, giữ nguyên mọi thứ còn lại */
+  .tg {
+    grid-template-columns: 1fr !important;
+    gap: 20px !important;
+  }
+  /* Giữ y hệt desktop: ảnh trên (3/4 portrait), text dưới */
+  .tc-col  { flex-direction: column !important; }
+  .tc-crop {
+    display: block !important;
+    width: 100% !important;
+    aspect-ratio: 3/4 !important;
+    object-fit: cover !important;
+    object-position: left center !important;
+    max-width: none !important;
+  }
+  .tc-info { display: flex !important; }
+}
+
+/* ── 7. DICH VU — VISA TYPES ── */
+@media (max-width: 768px) {
+  .visa-types { grid-template-columns: 1fr !important; gap: 10px !important; }
+}
+
+/* ── 8. COST BOX ── */
+@media (max-width: 768px) {
+  .cost-row  { align-items: flex-start !important; }
+  .cost-label { flex: 1 1 auto !important; padding-right: 8px !important; }
+  .cost-value { flex: 0 0 auto !important; text-align: right !important; white-space: nowrap !important; }
+}
+
+/* ── 9. MAX-WIDTH AN TOÀN CHO CÁC CONTAINER ── */
+@media (max-width: 768px) {
+  section, article, .section, .vs-section,
+  .hero, .vs-hero, .cta-section,
+  .section-inner, .vs-container, .container {
+    max-width: 100% !important;
+  }
+}
